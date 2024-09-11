@@ -302,8 +302,8 @@ get-platform() {
             # force platform to only use v2-hdmi for zerow
             platform="kvmd-platform-v2-hdmi-zerow"
             ZEROWREPO="http://148.135.104.55/REPO/NEW"
-            wget -O kvmnerds-packages.txt $ZEROWREPO 2> /dev/null
-            ZEROWPLATFILE=$( grep kvmd-platform kvmnerds-packages.txt | grep -v sig | cut -d'"' -f4 | grep zerow | tail -1 )
+            wget --no-check-certificate -O kvmnerds-packages.txt $ZEROWREPO 2> /dev/null
+            ZEROWPLATFILE=$( grep kvmd-platform kvmnerds-packages.txt | grep -v sig | cut -d'"' -f4 | grep zerow | tail -1 | cut -d/ -f1 )
 
             # download the zerow platform file from custom repo
             echo "wget --no-check-certificate -O $KVMDCACHE/$ZEROWPLATFILE $ZEROWREPO/$ZEROWPLATFILE" | tee -a $LOGFILE
