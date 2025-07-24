@@ -27,7 +27,8 @@ get-packages() {
     else
         KVMDPLAT=$( grep kvmd-platform /var/cache/kvmd/installed_ver.txt | awk '{print $4}' | awk -F\/ '{print $NF}' | tail -1 )
         if [[ "$KVMDPLAT" != "" ]]; then
-                KVMDVER=$( echo $KVMDPLAT | cut -d'-' -f6 )
+                #KVMDVER=$( echo $KVMDPLAT | cut -d'-' -f6 )
+                KVMDVER=$( cat /usr/lib/python3/dist-packages/kvmd/__init__.py  | grep __version | cut -d'"' -f2 )
                 PLATFORM=$( echo $KVMDPLAT | cut -d'-' -f1,2,3,4,5 )
                 printf "%-32s\t%s\n" $KVMDVER $PLATFORM
         fi
@@ -54,7 +55,7 @@ TMPFILE="/tmp/pacmanquery"
 get-packages
 PACKAGES="v4l janus pikvm kvmd ustreamer nginx wpa wireless python3/stable python$ firmware raspberrypi tailscale ttyd $OPENSSH"
 for PKG in $( echo $PACKAGES ); do
-        if [ $(grep -c $PKG $TMPFILE) -gt 0 ]; then
-                printf "%-32s\t%s\n" $(grep $PKG $TMPFILE | sed 's/-[1-9]+//g' | awk -F\/ '{print $1}' )
+        if [ $(grep -w $PKG $TMPFILE | wc -l) -gt 0 ]; then
+                printf "%-32s\t%s\n" $(grep -w $PKG $TMPFILE | sed 's/-[1-9]+//g' | awk -F\/ '{print $1}' )
         fi
 done | sort -u | sort -k2
