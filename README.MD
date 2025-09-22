@@ -95,7 +95,7 @@ update-rpikvm.sh
  - x86 VM and bare metal (tested by @srepac)
  - Orange pi 3b, OPi zero2w, and OPi zero 3 (tested by @thrice)
 
-# IMPORTAT PATHS
-- /usr/lib/python3/dist-packages/kvmd
-- /usr/share/kvmd/web
-- /etc/kvmd
+# IMPORTANT PATHS
+- /usr/lib/python3/dist-packages/kvmd   -- contains current kvmd python scripts
+- /usr/share/kvmd/web  -- contains web files
+- /etc/kvmd  -- contains custom configs for use with kvmd
