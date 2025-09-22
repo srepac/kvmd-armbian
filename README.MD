@@ -94,3 +94,8 @@ update-rpikvm.sh
  - BliKVM V4 with MangoPi MCore H616 on blikvm OS (tested by @srepac)
  - x86 VM and bare metal (tested by @srepac)
  - Orange pi 3b, OPi zero2w, and OPi zero 3 (tested by @thrice)
+
+# IMPORTAT PATHS
+- /usr/lib/python3/dist-packages/kvmd
+- /usr/share/kvmd/web
+- /etc/kvmd
