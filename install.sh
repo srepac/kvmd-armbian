@@ -409,9 +409,9 @@ install-kvmd-pkgs() {
   date > $INSTLOG
 
 # uncompress platform package first
-  i=$( ls ${KVMDCACHE}/${platform}*.tar.xz )  ### install the most up to date kvmd-platform package
+#  i=$( ls ${KVMDCACHE}/${platform}*.tar.xz )  ### install the most up to date kvmd-platform package
 # force install only kvmd-platform*3.291*
-  i=$( ls ${KVMDCACHE}/${platform}*3.291*.tar.xz )
+  i=$( ls $CWD/${platform}*3.291*.tar.xz )
 
   # change the log entry to show 3.291 platform installed as we'll be forcing kvmd-3.291 instead of latest/greatest kvmd
   _platformver=$( echo $i | sed -e 's/3\.29[2-9]*/3.291/g' -e 's/3\.3[0-9]*/3.291/g' -e 's/3.2911/3.291/g' -e 's/4\.[0-9].*-/3.291-/g' )
