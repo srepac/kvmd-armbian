@@ -56,7 +56,7 @@ csiflag=0
 errors=0
 warning=0
 ARCHLINUX=$( grep PRETTY /etc/os-release | grep -c Arch )
-UDEVRULESPATH="/usr/lib/udev/rules.d"
+UDEVRULESPATH="/usr/lib/udev/rules.d"     # PiKVM changed to this path recently 4.100+
 if [ $ARCHLINUX -eq 1 ]; then
   SEARCH="1-1.4"        # use only port 1-1.4 on arch linux pikvm
   PLATFORM=$( pacman -Q | grep kvmd-platform | cut -d'-' -f3,4,5 | sed 's/ /  /g' )
@@ -66,7 +66,7 @@ else
   # Show kvmd-platform version for raspbian pikvm on rpi4
   v2v3=$( grep platform /var/cache/kvmd/installed_ver.txt | cut -d'-' -f3 | tail -1 )
   if [[ ! -e $UDEVRULESPATH/99-kvmd.rules ]]; then
-    UDEVRULESPATH="/etc/udev/rules.d"
+    UDEVRULESPATH="/etc/udev/rules.d"     # default location for kvmd < 4.100
   fi
   if [[ $( grep video $UDEVRULESPATH/99-kvmd.rules | grep -c hdmiusb ) -gt 0 ]]; then
     platform="v2-hdmiusb-rpi4"
