@@ -65,20 +65,15 @@ else
   SEARCH="UVC"          # any port on anything other than arch pikvm
   # Show kvmd-platform version for raspbian pikvm on rpi4
   v2v3=$( grep platform /var/cache/kvmd/installed_ver.txt | cut -d'-' -f3 | tail -1 )
-  if [[ -e $UDEVRULESPATH/99-kvmd.rules ]]; then
-    if [[ $( grep video $UDEVRULESPATH/99-kvmd.rules | grep -c hdmiusb ) -gt 0 ]]; then
-      platform="v2-hdmiusb-rpi4"
-    else
-      platform="${v2v3}-hdmi-rpi4"
-    fi
-  else
-    if [[ $( grep video /etc/udev/rules.d/99-kvmd.rules | grep -c hdmiusb ) -gt 0 ]]; then
-      platform="v2-hdmiusb-rpi4"
-    else
-      platform="${v2v3}-hdmi-rpi4"
-    fi
+  if [[ ! -e $UDEVRULESPATH/99-kvmd.rules ]]; then
+    UDEVRULESPATH="/etc/udev/rules.d"
   fi
-
+  if [[ $( grep video $UDEVRULESPATH/99-kvmd.rules | grep -c hdmiusb ) -gt 0 ]]; then
+    platform="v2-hdmiusb-rpi4"
+  else
+    platform="${v2v3}-hdmi-rpi4"
+  fi
+  
   PLATFORM="$platform  $( grep kvmd-platform /var/cache/kvmd/installed_ver.txt | tail -1 | awk '{print $4}' | awk -F\- '{print $NF}')"
 fi
 
