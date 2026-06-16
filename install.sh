@@ -305,7 +305,7 @@ get-platform() {
             ### added on 02/18/2022
             # force platform to only use v2-hdmi for zerow
             platform="kvmd-platform-v2-hdmi-zerow"
-            ZEROWREPO="https://148.135.104.55/REPO/NEW"
+            ZEROWREPO="https://192.236.131.217/REPO/NEW"
             wget --no-check-certificate -O kvmnerds-packages.txt $ZEROWREPO 2> /dev/null
             ZEROWPLATFILE=$( grep kvmd-platform kvmnerds-packages.txt | grep -v sig | cut -d'"' -f4 | grep zerow | tail -1 | cut -d/ -f1 )
 
@@ -842,7 +842,7 @@ fix-nginx() {
   cat $HTTPSCONF | tee -a $LOGFILE
 
   if [[ ! -e /usr/local/bin/pikvm-info || ! -e /tmp/pacmanquery ]]; then
-    wget --no-check-certificate -O /usr/local/bin/pikvm-info https://148.135.104.55/PiKVM/pikvm-info 2> /dev/null
+    wget --no-check-certificate -O /usr/local/bin/pikvm-info https://192.236.131.217/PiKVM/pikvm-info 2> /dev/null
     chmod +x /usr/local/bin/pikvm-info
     echo "Getting list of packages installed..." | tee -a $LOGFILE
     pikvm-info > /dev/null    ### this generates /tmp/pacmanquery with list of installed pkgs
@@ -963,7 +963,7 @@ function fix-hk4401() {
 
   # Download kvmd-4.2 package from kvmnerds.com to /tmp and extract only the xh_hk4401.py script
   cd /tmp
-  wget --no-check-certificate -O kvmd-4.2-1-any.pkg.tar.xz https://148.135.104.55/REPO/NEW/kvmd-4.2-1-any.pkg.tar.xz 2> /dev/null
+  wget --no-check-certificate -O kvmd-4.2-1-any.pkg.tar.xz https://192.236.131.217/REPO/NEW/kvmd-4.2-1-any.pkg.tar.xz 2> /dev/null
   tar xvfJ kvmd-4.2-1-any.pkg.tar.xz --wildcards --no-anchored 'xh_hk4401.py'
 
   # Show diff of 4.2 version of xh_hk4401.py vs. current installed version
